@@ -1,7 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/Slices/Cart";
 
 export default function Cards(props) {
   const data = props.c_data;
+
+  const dispatch = useDispatch();
+
+  const handleAdd = (d) => {
+    // here i want to dispatch an action
+    dispatch(addItem(d)); // whatever i will add to this addItem now, it will be a payload to that action and eventually gets adds into the store.
+  };
+
   return (
     <div>
       <div
@@ -17,6 +27,8 @@ export default function Cards(props) {
           <p>{data.pname}</p>
           <p>{data.price}</p>
           <p>{data.rating}</p>
+          <br />
+          <button onClick={() => handleAdd(data)}>Add+</button>
         </div>
         <div>
           <img style={{ objectFit: "contain" }} src={data.img} alt="" />
@@ -42,7 +54,8 @@ export const ifpromoted = (Cards) => {
             background: "black",
             color: "white",
             marginLeft: "10vw",
-            padding: "2px",
+            padding: "5px",
+            borderRadius: "20px",
           }}
         >
           {" "}
